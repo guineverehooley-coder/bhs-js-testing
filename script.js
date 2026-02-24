@@ -106,3 +106,47 @@ function left2(str){
          return word;
     }
   
+
+    function firstLast6(arr){
+        if (arr[0]==6 || arr[arr.length-1]==6){
+    return true;
+}else{
+    return false;
+    }
+}
+
+function has23(arr){
+if (arr[0]==3||arr[0]==2||arr[1]==3||arr[1]==2){
+    return true;
+}else{
+    return false;
+}
+}
+
+function fix23(arr){
+    if (arr[0]==2 && arr[1]==3){
+        arr [1]=0 ;
+    }
+ if(arr[1]==2 && arr[2]==3){
+    arr[2]=0;
+        }
+    return arr;
+    }
+
+ function countYZ(str){
+    let i = str.length;
+    let words= 0;
+    if (str[i]==y||str[i]==z){
+        words++;
+    }
+    while (i>0){
+        if (str[i]==" "){
+            if (str[i-1]=="z"||str[i-1]=="y"){
+                words=words+1;
+            } 
+        i--;
+        }
+    }
+    return words;
+    }
+}
