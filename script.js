@@ -6,6 +6,8 @@
  * 
  */
 
+const { jsxs } = require("react/jsx-runtime");
+
 function sleep_in(weekday,vacation){
     if(!weekday&&!vacation||!weekday&&vacation||weekday&&vacation){
         return true;
@@ -134,19 +136,98 @@ function fix23(arr){
     }
 
  function countYZ(str){
-    let i = str.length;
+    let i = str.length-1;
     let words= 0;
-    if (str[i]==y||str[i]==z){
+    if (str[i].toUpperCase()=="Y"||str[i].toUpperCase()=="Z"){
         words++;
     }
     while (i>0){
         if (str[i]==" "){
-            if (str[i-1]=="z"||str[i-1]=="y"){
+            if (str[i-1].toUpperCase()=="Z"||str[i-1].toUpperCase()=="Y"){
                 words=words+1;
             } 
-        i--;
         }
+        i--;
     }
     return words;
     }
+
+function endOther(str1,str2){
+    let i= str1.length-1;
+    let j= str2.length-1;
+    while(i>=0&&j>=0){
+        if(str1[i].toLowerCase()!=str2[j].toLowerCase()){
+            return false;
+        }
+        i--;
+        j--;
+    }
+    return true;
+}
+
+function starOut(str){
+    let result= "";
+    for(let i=0; i<str.length;i++){
+        if(str[i]!="*"&&str[i-1]!="*"&&str[i+1]!="*"){
+            result+=str[i]
+        }
+    }
+    return result;
+}
+
+function getSandwich(bread) {
+    let sand = bread.indexOf("bread");
+    let wich = bread.lastIndexOf("bread");
+    let result = "";
+    if (sand == -1||sand == wich){
+        return result;
+    }else{
+        return result = bread.substring(sand+5,wich);
+    }
+}
+ function canBalance(arr){
+    let sum1 = 0;
+    let sum2 = 0;
+    for(let i=0; i < arr.length; i++){
+        sum1 +=arr[i]
+        sum2=0;
+        for(let j=i+1; j < arr.length; j++){
+            sum2 +=arr[j];
+        }
+        if(sum1==sum2){
+            return true;
+        }
+    }
+    return false;
+}
+
+function countClumps(arr){
+    let numClumps= 0;
+    let clumpStart= arr[0];
+    let clumpSize=  1;
+    for (let i=1 ; i < arr.length; i++){
+        if (arr[i]==clumpStart){
+            clumpSize += 1;
+        }else{
+            clumpStart= arr[i];
+            if(clumpSize >=2){
+                numClumps += 1;
+            }
+            clumpSize = 1;
+        }
+    }
+    if(clumpSize >=2){
+        numClumps += 1;
+    }
+    return numClumps;
+}
+
+function sameEnds(str) {
+let result= "";
+for(let i=0; i <=str.length/2;i++){
+    if (str.substring(0,i) == str.substring(str.length - i)){
+        result = str.substring(0,i)
+    }
+}
+  return result;
 }
